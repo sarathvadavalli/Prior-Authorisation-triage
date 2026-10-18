@@ -1,0 +1,1601 @@
+[
+  {
+    "id": "mri-30-days-agreed-example",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 30,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy duration is 30 days; at least 42 days are required."
+      ]
+    }
+  },
+  {
+    "id": "mri-41-days-insufficient",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 41,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy duration is 41 days; at least 42 days are required."
+      ]
+    }
+  },
+  {
+    "id": "mri-42-day-boundary",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 42,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "MRI lumbar spine has 42 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "mri-43-days",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 43,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "MRI lumbar spine has 43 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "mri-medication-qualifies",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 42,
+      "conservative_therapy_type": "medication",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "MRI lumbar spine has 42 days of documented medication, meeting the 42-day minimum under R1; no red flags were reported.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "mri-duration-missing",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": null,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy duration is missing."
+      ]
+    }
+  },
+  {
+    "id": "mri-duration-negative",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": -1,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy duration is invalid; provide a nonnegative integer number of days."
+      ]
+    }
+  },
+  {
+    "id": "mri-duration-fractional",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 41.5,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy duration is invalid; provide a nonnegative integer number of days."
+      ]
+    }
+  },
+  {
+    "id": "mri-duration-malformed",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": "invalid",
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy duration is invalid; provide a nonnegative integer number of days."
+      ]
+    }
+  },
+  {
+    "id": "mri-duration-numeric-string",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": "42",
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy duration is invalid; provide a nonnegative integer number of days."
+      ]
+    }
+  },
+  {
+    "id": "mri-duration-boolean",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": true,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy duration is invalid; provide a nonnegative integer number of days."
+      ]
+    }
+  },
+  {
+    "id": "mri-documentation-missing",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 42,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": null
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy documentation status is missing."
+      ]
+    }
+  },
+  {
+    "id": "mri-undocumented-therapy",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 42,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": false
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy documentation is required."
+      ]
+    }
+  },
+  {
+    "id": "mri-documentation-invalid",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 42,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": "yes"
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy documentation status is invalid; provide yes or no."
+      ]
+    }
+  },
+  {
+    "id": "mri-type-missing",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 42,
+      "conservative_therapy_type": null,
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy type is missing."
+      ]
+    }
+  },
+  {
+    "id": "mri-type-unsupported",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 42,
+      "conservative_therapy_type": "rest",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy type is invalid; R1 requires physiotherapy or medication."
+      ]
+    }
+  },
+  {
+    "id": "mri-multiple-gaps",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 30,
+      "conservative_therapy_type": "rest",
+      "conservative_therapy_documented": false
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy duration is 30 days; at least 42 days are required.",
+        "Conservative therapy documentation is required.",
+        "Conservative therapy type is invalid; R1 requires physiotherapy or medication."
+      ]
+    }
+  },
+  {
+    "id": "mri-all-evidence-missing",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": null,
+      "conservative_therapy_type": null,
+      "conservative_therapy_documented": null
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy duration is missing.",
+        "Conservative therapy documentation status is missing.",
+        "Conservative therapy type is missing."
+      ]
+    }
+  },
+  {
+    "id": "mri-ignores-irrelevant-ct-and-knee-evidence",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 42,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true,
+      "trauma_hours": "invalid",
+      "gcs_documented": false,
+      "mri_report_attached": false
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "MRI lumbar spine has 42 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "ct-zero-hour-boundary",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": 0,
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Trauma occurred 0 hours ago, within 0 to 48 hours inclusive, and GCS is documented under R3; no red flags were reported.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "ct-48-hour-boundary",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": 48,
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Trauma occurred 48 hours ago, within 0 to 48 hours inclusive, and GCS is documented under R3; no red flags were reported.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "ct-fractional-hours",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": 0.5,
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Trauma occurred 0.5 hours ago, within 0 to 48 hours inclusive, and GCS is documented under R3; no red flags were reported.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "ct-no-gcs-score-required",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": 24,
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Trauma occurred 24 hours ago, within 0 to 48 hours inclusive, and GCS is documented under R3; no red flags were reported.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "ct-negative-hours",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": -1,
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "Trauma time is -1 hours; negative hours are invalid."
+      ]
+    }
+  },
+  {
+    "id": "ct-over-48-hours",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": 49,
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "Trauma time is 49 hours; R3 requires 0 to 48 hours inclusive."
+      ]
+    }
+  },
+  {
+    "id": "ct-just-over-boundary",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": 48.01,
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "Trauma time is 48.01 hours; R3 requires 0 to 48 hours inclusive."
+      ]
+    }
+  },
+  {
+    "id": "ct-hours-missing",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": null,
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "Trauma time is missing."
+      ]
+    }
+  },
+  {
+    "id": "ct-hours-malformed",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": "invalid",
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "Trauma time is invalid; provide a finite number of hours."
+      ]
+    }
+  },
+  {
+    "id": "ct-hours-numeric-string",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": "24",
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "Trauma time is invalid; provide a finite number of hours."
+      ]
+    }
+  },
+  {
+    "id": "ct-hours-boolean",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": true,
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "Trauma time is invalid; provide a finite number of hours."
+      ]
+    }
+  },
+  {
+    "id": "ct-hours-nan",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": null,
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "Trauma time is invalid; provide a finite number of hours."
+      ]
+    },
+    "non_finite_trauma_hours": "nan"
+  },
+  {
+    "id": "ct-hours-infinity",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": null,
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "Trauma time is invalid; provide a finite number of hours."
+      ]
+    },
+    "non_finite_trauma_hours": "infinity"
+  },
+  {
+    "id": "ct-hours-negative_infinity",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": null,
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "Trauma time is invalid; provide a finite number of hours."
+      ]
+    },
+    "non_finite_trauma_hours": "negative_infinity"
+  },
+  {
+    "id": "ct-gcs-not-documented",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": 24,
+      "gcs_documented": false
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "GCS documentation is required."
+      ]
+    }
+  },
+  {
+    "id": "ct-gcs-documentation-missing",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": 24,
+      "gcs_documented": null
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "GCS documentation status is missing."
+      ]
+    }
+  },
+  {
+    "id": "ct-gcs-score-is-not-documentation",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": 24,
+      "gcs_documented": 15
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "GCS documentation status is invalid; provide yes or no."
+      ]
+    }
+  },
+  {
+    "id": "ct-truthy-string-is-not-documentation",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": 24,
+      "gcs_documented": "yes"
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "GCS documentation status is invalid; provide yes or no."
+      ]
+    }
+  },
+  {
+    "id": "ct-multiple-gaps",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": -1,
+      "gcs_documented": false
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "Trauma time is -1 hours; negative hours are invalid.",
+        "GCS documentation is required."
+      ]
+    }
+  },
+  {
+    "id": "ct-all-evidence-missing",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": null,
+      "gcs_documented": null
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "Trauma time is missing.",
+        "GCS documentation status is missing."
+      ]
+    }
+  },
+  {
+    "id": "ct-ignores-irrelevant-therapy-evidence",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": 24,
+      "gcs_documented": true,
+      "conservative_therapy_days": "invalid",
+      "conservative_therapy_documented": false,
+      "mri_report_attached": false
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Trauma occurred 24 hours ago, within 0 to 48 hours inclusive, and GCS is documented under R3; no red flags were reported.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "knee-83-days-insufficient",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 83,
+      "conservative_therapy_documented": true,
+      "mri_report_attached": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R4"
+      ],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "Conservative therapy duration is 83 days; at least 84 days are required."
+      ]
+    }
+  },
+  {
+    "id": "knee-84-day-boundary",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 84,
+      "conservative_therapy_documented": true,
+      "mri_report_attached": true
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R4"
+      ],
+      "explanation": "Knee arthroscopy has 84 days of documented conservative therapy, meeting the 84-day minimum, and an MRI report is attached under R4; no red flags were reported.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "knee-85-days",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 85,
+      "conservative_therapy_documented": true,
+      "mri_report_attached": true
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R4"
+      ],
+      "explanation": "Knee arthroscopy has 85 days of documented conservative therapy, meeting the 84-day minimum, and an MRI report is attached under R4; no red flags were reported.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "knee-no-modality-restriction",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 84,
+      "conservative_therapy_documented": true,
+      "mri_report_attached": true,
+      "conservative_therapy_type": "activity modification"
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R4"
+      ],
+      "explanation": "Knee arthroscopy has 84 days of documented conservative therapy, meeting the 84-day minimum, and an MRI report is attached under R4; no red flags were reported.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "knee-duration-missing",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": null,
+      "conservative_therapy_documented": true,
+      "mri_report_attached": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "Conservative therapy duration is missing."
+      ]
+    }
+  },
+  {
+    "id": "knee-duration-negative",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": -1,
+      "conservative_therapy_documented": true,
+      "mri_report_attached": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R4"
+      ],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "Conservative therapy duration is invalid; provide a nonnegative integer number of days."
+      ]
+    }
+  },
+  {
+    "id": "knee-duration-fractional",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 83.5,
+      "conservative_therapy_documented": true,
+      "mri_report_attached": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R4"
+      ],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "Conservative therapy duration is invalid; provide a nonnegative integer number of days."
+      ]
+    }
+  },
+  {
+    "id": "knee-duration-malformed",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": "invalid",
+      "conservative_therapy_documented": true,
+      "mri_report_attached": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R4"
+      ],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "Conservative therapy duration is invalid; provide a nonnegative integer number of days."
+      ]
+    }
+  },
+  {
+    "id": "knee-duration-numeric-string",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": "84",
+      "conservative_therapy_documented": true,
+      "mri_report_attached": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R4"
+      ],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "Conservative therapy duration is invalid; provide a nonnegative integer number of days."
+      ]
+    }
+  },
+  {
+    "id": "knee-duration-boolean",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": true,
+      "conservative_therapy_documented": true,
+      "mri_report_attached": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R4"
+      ],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "Conservative therapy duration is invalid; provide a nonnegative integer number of days."
+      ]
+    }
+  },
+  {
+    "id": "knee-therapy-undocumented",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 84,
+      "conservative_therapy_documented": false,
+      "mri_report_attached": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R4"
+      ],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "Conservative therapy documentation is required."
+      ]
+    }
+  },
+  {
+    "id": "knee-documentation-missing",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 84,
+      "conservative_therapy_documented": null,
+      "mri_report_attached": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "Conservative therapy documentation status is missing."
+      ]
+    }
+  },
+  {
+    "id": "knee-invalid-documentation",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 84,
+      "conservative_therapy_documented": 1,
+      "mri_report_attached": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R4"
+      ],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "Conservative therapy documentation status is invalid; provide yes or no."
+      ]
+    }
+  },
+  {
+    "id": "knee-report-not-attached",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 84,
+      "conservative_therapy_documented": true,
+      "mri_report_attached": false
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R4"
+      ],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "MRI report attachment is required."
+      ]
+    }
+  },
+  {
+    "id": "knee-report-status-missing",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 84,
+      "conservative_therapy_documented": true,
+      "mri_report_attached": null
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "MRI report attachment status is missing."
+      ]
+    }
+  },
+  {
+    "id": "knee-report-status-invalid",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 84,
+      "conservative_therapy_documented": true,
+      "mri_report_attached": "attached"
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R4"
+      ],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "MRI report attachment status is invalid; provide yes or no."
+      ]
+    }
+  },
+  {
+    "id": "knee-multiple-gaps",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 83,
+      "conservative_therapy_documented": false,
+      "mri_report_attached": false
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R4"
+      ],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "Conservative therapy duration is 83 days; at least 84 days are required.",
+        "Conservative therapy documentation is required.",
+        "MRI report attachment is required."
+      ]
+    }
+  },
+  {
+    "id": "knee-all-evidence-missing",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": null,
+      "conservative_therapy_documented": null,
+      "mri_report_attached": null
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "Conservative therapy duration is missing.",
+        "Conservative therapy documentation status is missing.",
+        "MRI report attachment status is missing."
+      ]
+    }
+  },
+  {
+    "id": "mri-red-flag-overrides-invalid-evidence",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": true,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": "invalid",
+      "conservative_therapy_type": "unsupported",
+      "conservative_therapy_documented": "invalid",
+      "trauma_hours": "invalid",
+      "gcs_documented": "invalid",
+      "mri_report_attached": "invalid"
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "ct-red-flag-overrides-invalid-evidence",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": true,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": "invalid",
+      "gcs_documented": "invalid",
+      "conservative_therapy_days": "invalid",
+      "conservative_therapy_documented": "invalid",
+      "conservative_therapy_type": "unsupported",
+      "mri_report_attached": "invalid"
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "knee-red-flag-overrides-invalid-evidence",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": true,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": "invalid",
+      "conservative_therapy_documented": "invalid",
+      "mri_report_attached": "invalid",
+      "conservative_therapy_type": "unsupported",
+      "trauma_hours": "invalid",
+      "gcs_documented": "invalid"
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "mri-zero-days-is-supplied-and-needs-info",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 0,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy duration is 0 days; at least 42 days are required."
+      ]
+    }
+  },
+  {
+    "id": "mri-missing-type-precedes-insufficient-duration",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 30,
+      "conservative_therapy_type": null,
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy type is missing."
+      ]
+    }
+  },
+  {
+    "id": "ct-missing-gcs-precedes-invalid-hours",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": -1,
+      "gcs_documented": null
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the CT head request under R3.",
+      "evidence_gaps": [
+        "GCS documentation status is missing."
+      ]
+    }
+  },
+  {
+    "id": "knee-missing-report-status-precedes-insufficient-duration",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 83,
+      "conservative_therapy_documented": true,
+      "mri_report_attached": null
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+      "evidence_gaps": [
+        "MRI report attachment status is missing."
+      ]
+    }
+  },
+  {
+    "id": "mri-40-days-keeps-details-only-in-evidence-gaps",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 40,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy duration is 40 days; at least 42 days are required."
+      ]
+    }
+  }
+]

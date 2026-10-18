@@ -1,0 +1,21 @@
+# Native theme adapted from Streamlit's shadcn template; no remote fonts.
+[theme]
+base = "light"
+primaryColor = "#087F8C"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F3F7FA"
+textColor = "#172B4D"
+borderColor = "#DCE5ED"
+showWidgetBorder = true
+baseRadius = "10px"
+buttonRadius = "8px"
+font = "sans-serif"
+baseFontSize = 15
+headingFontSizes = ["36px", "28px", "22px", "18px", "16px", "14px"]
+headingFontWeights = [600, 600, 600, 600, 600, 600]
+greenColor = "#16734B"
+orangeColor = "#A35C08"
+blueColor = "#285FA3"
+
+[browser]
+gatherUsageStats = false

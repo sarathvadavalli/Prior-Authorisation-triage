@@ -1,0 +1,417 @@
+[
+  {
+    "id": "cancer-overrides-approvable-mri",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": true,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 42,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "neurological-deficit-overrides-approvable-ct",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": true,
+        "suspected_infection": false
+      },
+      "trauma_hours": 24,
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: New neurological deficit. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "infection-overrides-approvable-knee",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": true
+      },
+      "conservative_therapy_days": 84,
+      "conservative_therapy_documented": true,
+      "mri_report_attached": true
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: Suspected infection. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "multiple-flags-are-all-named",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": true,
+        "new_neurological_deficit": true,
+        "suspected_infection": true
+      }
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: History of cancer, New neurological deficit, Suspected infection. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "positive-flag-overrides-other-unknown-flags",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "new_neurological_deficit": true
+      }
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: New neurological deficit. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "positive-flag-overrides-missing-mri-evidence",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": true,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      }
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "positive-flag-overrides-invalid-mri-evidence",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": true
+      },
+      "conservative_therapy_days": "invalid",
+      "conservative_therapy_type": "unsupported",
+      "conservative_therapy_documented": "invalid"
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "positive-flag-overrides-negative-trauma-hours",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "suspected_infection": true
+      },
+      "trauma_hours": -1,
+      "gcs_documented": false
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: Suspected infection. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "positive-flag-overrides-malformed-ct-evidence",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "new_neurological_deficit": true
+      },
+      "trauma_hours": "invalid",
+      "gcs_documented": "invalid"
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: New neurological deficit. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "positive-flag-overrides-invalid-knee-evidence",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "suspected_infection": true
+      },
+      "conservative_therapy_days": -10,
+      "conservative_therapy_documented": false,
+      "mri_report_attached": false
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: Suspected infection. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "red-flag-takes-precedence-over-unlisted-procedure",
+    "input": {
+      "procedure": "Ultrasound abdomen",
+      "red_flags": {
+        "history_of_cancer": true,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      }
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "unlisted-procedure-referral",
+    "input": {
+      "procedure": "Ultrasound abdomen",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      }
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R5"
+      ],
+      "explanation": "Procedure 'Ultrasound abdomen' is not listed in R1, R3, or R4. R5 requires clinician review; no listed approval rule applies.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "similar-procedure-is-not-inferred-to-be-listed",
+    "input": {
+      "procedure": "MRI cervical spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 100,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R5"
+      ],
+      "explanation": "Procedure 'MRI cervical spine' is not listed in R1, R3, or R4. R5 requires clinician review; no listed approval rule applies.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "unlisted-procedure-does-not-validate-irrelevant-evidence",
+    "input": {
+      "procedure": "Ultrasound abdomen",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": "invalid",
+      "conservative_therapy_days": -1
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R5"
+      ],
+      "explanation": "Procedure 'Ultrasound abdomen' is not listed in R1, R3, or R4. R5 requires clinician review; no listed approval rule applies.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "all-unanswered-flags-require-clarification",
+    "input": {
+      "procedure": "CT head",
+      "trauma_hours": 24,
+      "gcs_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the CT head request under R2.",
+      "evidence_gaps": [
+        "History of cancer status is unknown.",
+        "New neurological deficit status is unknown.",
+        "Suspected infection status is unknown."
+      ]
+    }
+  },
+  {
+    "id": "single-unknown-flag-is-not-assumed-absent",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": null
+      },
+      "conservative_therapy_days": 42,
+      "conservative_therapy_type": "medication",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R2.",
+      "evidence_gaps": [
+        "Suspected infection status is unknown."
+      ]
+    }
+  },
+  {
+    "id": "unknown-flags-precede-unlisted-procedure-routing",
+    "input": {
+      "procedure": "Ultrasound abdomen",
+      "red_flags": {
+        "history_of_cancer": false
+      }
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the Ultrasound abdomen request under R2.",
+      "evidence_gaps": [
+        "New neurological deficit status is unknown.",
+        "Suspected infection status is unknown."
+      ]
+    }
+  },
+  {
+    "id": "unknown-flags-precede-invalid-procedure-evidence",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": "invalid",
+      "mri_report_attached": false
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R2.",
+      "evidence_gaps": [
+        "History of cancer status is unknown."
+      ]
+    }
+  },
+  {
+    "id": "positive-flag-overrides-missing-ct-evidence",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": true,
+        "suspected_infection": false
+      }
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: New neurological deficit. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "positive-flag-overrides-missing-knee-evidence",
+    "input": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": true
+      }
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Reported red flags: Suspected infection. R2 requires clinician review regardless of procedure or other evidence.",
+      "evidence_gaps": []
+    }
+  }
+]

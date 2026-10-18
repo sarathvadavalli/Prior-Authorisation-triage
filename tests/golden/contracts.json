@@ -1,0 +1,424 @@
+[
+  {
+    "id": "complete-synthetic-mri-request",
+    "contract": "request",
+    "input": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 42,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true
+    },
+    "expected": {
+      "procedure": "MRI lumbar spine",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": 42,
+      "conservative_therapy_type": "physiotherapy",
+      "conservative_therapy_documented": true,
+      "trauma_hours": null,
+      "gcs_documented": null,
+      "mri_report_attached": null
+    }
+  },
+  {
+    "id": "explicitly-missing-ct-evidence",
+    "contract": "request",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "trauma_hours": null,
+      "gcs_documented": false
+    },
+    "expected": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": false,
+        "new_neurological_deficit": false,
+        "suspected_infection": false
+      },
+      "conservative_therapy_days": null,
+      "conservative_therapy_type": null,
+      "conservative_therapy_documented": null,
+      "trauma_hours": null,
+      "gcs_documented": false,
+      "mri_report_attached": null
+    }
+  },
+  {
+    "id": "unanswered-flags-remain-unknown",
+    "contract": "request",
+    "input": {
+      "procedure": "Knee arthroscopy"
+    },
+    "expected": {
+      "procedure": "Knee arthroscopy",
+      "red_flags": {
+        "history_of_cancer": null,
+        "new_neurological_deficit": null,
+        "suspected_infection": null
+      },
+      "conservative_therapy_days": null,
+      "conservative_therapy_type": null,
+      "conservative_therapy_documented": null,
+      "trauma_hours": null,
+      "gcs_documented": null,
+      "mri_report_attached": null
+    }
+  },
+  {
+    "id": "positive-flag-and-malformed-evidence-are-preserved",
+    "contract": "request",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": true,
+        "new_neurological_deficit": false,
+        "suspected_infection": null
+      },
+      "trauma_hours": "invalid"
+    },
+    "expected": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": true,
+        "new_neurological_deficit": false,
+        "suspected_infection": null
+      },
+      "conservative_therapy_days": null,
+      "conservative_therapy_type": null,
+      "conservative_therapy_documented": null,
+      "trauma_hours": "invalid",
+      "gcs_documented": null,
+      "mri_report_attached": null
+    }
+  },
+  {
+    "id": "approval-result-contract",
+    "contract": "result",
+    "input": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Trauma occurred 24 hours ago and GCS is documented under R3; no red flags were reported.",
+      "evidence_gaps": []
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R3"
+      ],
+      "explanation": "Trauma occurred 24 hours ago and GCS is documented under R3; no red flags were reported.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "needs-info-reason-and-rule-contract",
+    "contract": "result",
+    "input": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy duration is 30 days; at least 42 days are required."
+      ]
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+      "evidence_gaps": [
+        "Conservative therapy duration is 30 days; at least 42 days are required."
+      ]
+    }
+  },
+  {
+    "id": "clinician-review-result-contract",
+    "contract": "result",
+    "input": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "History of cancer was reported. R2 requires clinician review regardless of other evidence.",
+      "evidence_gaps": []
+    },
+    "expected": {
+      "status": "completed",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "History of cancer was reported. R2 requires clinician review regardless of other evidence.",
+      "evidence_gaps": []
+    }
+  },
+  {
+    "id": "pending-clarification-is-not-a-fourth-outcome",
+    "contract": "result",
+    "input": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the CT head request under R2.",
+      "evidence_gaps": [
+        "Suspected infection status is unknown."
+      ]
+    },
+    "expected": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Insufficient information to evaluate the CT head request under R2.",
+      "evidence_gaps": [
+        "Suspected infection status is unknown."
+      ]
+    }
+  },
+  {
+    "id": "deny-is-not-a-completed-outcome",
+    "contract": "result",
+    "input": {
+      "status": "completed",
+      "outcome": "Deny",
+      "rule_ids": [
+        "R6"
+      ],
+      "explanation": "Invalid synthetic response.",
+      "evidence_gaps": []
+    },
+    "expected": {
+      "error": "Invalid completed outcome"
+    }
+  },
+  {
+    "id": "pending-needs-info-requires-rule",
+    "contract": "result",
+    "input": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [],
+      "explanation": "Confirm red flags.",
+      "evidence_gaps": [
+        "Red flags are unknown."
+      ]
+    },
+    "expected": {
+      "error": "Rule IDs required."
+    }
+  },
+  {
+    "id": "completed-result-requires-a-rule",
+    "contract": "result",
+    "input": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [],
+      "explanation": "Invalid synthetic response.",
+      "evidence_gaps": []
+    },
+    "expected": {
+      "error": "Rule IDs required."
+    }
+  },
+  {
+    "id": "decision-requires-a-reason",
+    "contract": "result",
+    "input": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "",
+      "evidence_gaps": []
+    },
+    "expected": {
+      "error": "An explanation is not provided."
+    }
+  },
+  {
+    "id": "pending-must-identify-unanswered-information",
+    "contract": "result",
+    "input": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Confirm red flags.",
+      "evidence_gaps": []
+    },
+    "expected": {
+      "error": "Missing information must be identified."
+    }
+  },
+  {
+    "id": "unsupported-rule-is-rejected",
+    "contract": "result",
+    "input": {
+      "status": "completed",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R7"
+      ],
+      "explanation": "Invalid synthetic response.",
+      "evidence_gaps": []
+    },
+    "expected": {
+      "error": "Rule IDs must be R1 through R6."
+    }
+  },
+  {
+    "id": "invalid-status-is-rejected",
+    "contract": "result",
+    "input": {
+      "status": "unknown",
+      "outcome": null,
+      "rule_ids": [],
+      "explanation": "Invalid synthetic response.",
+      "evidence_gaps": []
+    },
+    "expected": {
+      "error": "Invalid status."
+    }
+  },
+  {
+    "id": "ambiguous-red-flag-value-is-not-coerced",
+    "contract": "request",
+    "input": {
+      "procedure": "CT head",
+      "red_flags": {
+        "history_of_cancer": "no"
+      }
+    },
+    "expected": {
+      "error": "Red-flag answers must be true, false or null."
+    }
+  },
+  {
+    "id": "completed-needs-info-is-rejected",
+    "contract": "result",
+    "input": {
+      "status": "completed",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Synthetic contract example.",
+      "evidence_gaps": [
+        "Therapy duration is insufficient."
+      ]
+    },
+    "expected": {
+      "error": "Invalid completed outcome"
+    }
+  },
+  {
+    "id": "pending-clarification-cannot-carry-clinical-rule",
+    "contract": "result",
+    "input": {
+      "status": "pending_info",
+      "outcome": null,
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Synthetic contract example.",
+      "evidence_gaps": [
+        "Therapy duration is missing."
+      ]
+    },
+    "expected": {
+      "error": "Pending clarification cannot have clinical rule IDs."
+    }
+  },
+  {
+    "id": "pending-cannot-carry-approval",
+    "contract": "result",
+    "input": {
+      "status": "pending_info",
+      "outcome": "Approve",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Synthetic contract example.",
+      "evidence_gaps": [
+        "Synthetic evidence gap."
+      ]
+    },
+    "expected": {
+      "error": "Pending result outcome must be Needs info or None."
+    }
+  },
+  {
+    "id": "pending-cannot-carry-clinician-review",
+    "contract": "result",
+    "input": {
+      "status": "pending_info",
+      "outcome": "Clinician review",
+      "rule_ids": [
+        "R2"
+      ],
+      "explanation": "Synthetic contract example.",
+      "evidence_gaps": [
+        "Synthetic evidence gap."
+      ]
+    },
+    "expected": {
+      "error": "Pending result outcome must be Needs info or None."
+    }
+  },
+  {
+    "id": "pending-needs-info-requires-evidence-gaps",
+    "contract": "result",
+    "input": {
+      "status": "pending_info",
+      "outcome": "Needs info",
+      "rule_ids": [
+        "R1"
+      ],
+      "explanation": "Synthetic contract example.",
+      "evidence_gaps": []
+    },
+    "expected": {
+      "error": "Missing information must be identified."
+    }
+  },
+  {
+    "id": "deny-is-not-a-pending-outcome",
+    "contract": "result",
+    "input": {
+      "status": "pending_info",
+      "outcome": "Deny",
+      "rule_ids": [
+        "R6"
+      ],
+      "explanation": "Synthetic contract example.",
+      "evidence_gaps": [
+        "Synthetic evidence gap."
+      ]
+    },
+    "expected": {
+      "error": "Pending result outcome must be Needs info or None."
+    }
+  }
+]

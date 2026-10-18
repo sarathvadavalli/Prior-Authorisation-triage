@@ -1,0 +1,2350 @@
+[
+  {
+    "id": "initial-empty-workspace",
+    "steps": [
+      {
+        "expected": {
+          "result": null,
+          "success": [],
+          "warning": [],
+          "info": [
+            "Complete the request and select Run triage to see the outcome and its reason."
+          ],
+          "text": [],
+          "markdown": [
+            ":gray-badge[:material/pending: Awaiting request]"
+          ],
+          "captions": [
+            "Your result will include the applicable rules and any evidence gaps."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mri-approval-and-edit-resubmit",
+    "steps": [
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No",
+          "mri_documented": "Yes"
+        },
+        "selectbox": {
+          "mri_type": "physiotherapy"
+        },
+        "text_input": {
+          "mri_days": "42"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Approve",
+            "rule_ids": [
+              "R1"
+            ],
+            "explanation": "MRI lumbar spine has 42 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported.",
+            "evidence_gaps": []
+          },
+          "success": [
+            "Approve"
+          ],
+          "warning": [],
+          "info": [],
+          "text": [
+            "MRI lumbar spine has 42 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported."
+          ],
+          "markdown": [
+            ":primary-badge[R1]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "The synthetic request meets the applicable payer rule.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "text_input": {
+          "mri_days": "30"
+        },
+        "expected": {
+          "result": null,
+          "success": [],
+          "warning": [],
+          "info": [
+            "Request updated. Run triage again to see the current outcome."
+          ],
+          "text": [],
+          "markdown": [
+            ":gray-badge[:material/pending: Awaiting request]"
+          ],
+          "captions": [
+            "Your result will include the applicable rules and any evidence gaps."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": "Needs info",
+            "rule_ids": [
+              "R1"
+            ],
+            "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+            "evidence_gaps": [
+              "Conservative therapy duration is 30 days; at least 42 days are required."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Needs more info"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+            "Conservative therapy duration is 30 days; at least 42 days are required."
+          ],
+          "markdown": [
+            ":primary-badge[R1]",
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "More or sufficient evidence is needed. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mri-medication-approval",
+    "steps": [
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No",
+          "mri_documented": "Yes"
+        },
+        "selectbox": {
+          "mri_type": "medication"
+        },
+        "text_input": {
+          "mri_days": "42"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Approve",
+            "rule_ids": [
+              "R1"
+            ],
+            "explanation": "MRI lumbar spine has 42 days of documented medication, meeting the 42-day minimum under R1; no red flags were reported.",
+            "evidence_gaps": []
+          },
+          "success": [
+            "Approve"
+          ],
+          "warning": [],
+          "info": [],
+          "text": [
+            "MRI lumbar spine has 42 days of documented medication, meeting the 42-day minimum under R1; no red flags were reported."
+          ],
+          "markdown": [
+            ":primary-badge[R1]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "The synthetic request meets the applicable payer rule.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mri-missing-values-remain-missing",
+    "steps": [
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": null,
+            "rule_ids": [],
+            "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+            "evidence_gaps": [
+              "Conservative therapy duration is missing.",
+              "Conservative therapy documentation status is missing.",
+              "Conservative therapy type is missing."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Clarification required"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+            "Conservative therapy duration is missing.",
+            "Conservative therapy documentation status is missing.",
+            "Conservative therapy type is missing."
+          ],
+          "markdown": [
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "No final classification has been made."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "unknown-red-flags-prompt-clarification",
+    "steps": [
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": null,
+            "rule_ids": [],
+            "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R2.",
+            "evidence_gaps": [
+              "History of cancer status is unknown.",
+              "New neurological deficit status is unknown.",
+              "Suspected infection status is unknown."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Clarification required"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the MRI lumbar spine request under R2.",
+            "History of cancer status is unknown.",
+            "New neurological deficit status is unknown.",
+            "Suspected infection status is unknown."
+          ],
+          "markdown": [
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "No final classification has been made."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "positive-flag-overrides-invalid-mri-evidence-and-unknown-flags",
+    "steps": [
+      {
+        "text_input": {
+          "mri_days": "thirty"
+        },
+        "segmented_control": {
+          "history_of_cancer": "Yes"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Clinician review",
+            "rule_ids": [
+              "R2"
+            ],
+            "explanation": "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence.",
+            "evidence_gaps": []
+          },
+          "success": [],
+          "warning": [],
+          "info": [
+            "Clinician review"
+          ],
+          "text": [
+            "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence."
+          ],
+          "markdown": [
+            ":primary-badge[R2]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "Referral for clinician review. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "ct-approval-at-zero-hours",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "CT head"
+        },
+        "expected": {
+          "result": null,
+          "success": [],
+          "warning": [],
+          "info": [
+            "Complete the request and select Run triage to see the outcome and its reason."
+          ],
+          "text": [],
+          "markdown": [
+            ":gray-badge[:material/pending: Awaiting request]"
+          ],
+          "captions": [
+            "Your result will include the applicable rules and any evidence gaps."
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No",
+          "gcs_documented": "Yes"
+        },
+        "text_input": {
+          "ct_hours": "0"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Approve",
+            "rule_ids": [
+              "R3"
+            ],
+            "explanation": "Trauma occurred 0 hours ago, within 0 to 48 hours inclusive, and GCS is documented under R3; no red flags were reported.",
+            "evidence_gaps": []
+          },
+          "success": [
+            "Approve"
+          ],
+          "warning": [],
+          "info": [],
+          "text": [
+            "Trauma occurred 0 hours ago, within 0 to 48 hours inclusive, and GCS is documented under R3; no red flags were reported."
+          ],
+          "markdown": [
+            ":primary-badge[R3]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "The synthetic request meets the applicable payer rule.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "ct-approval-at-48-hours-no-score-field",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "CT head"
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No",
+          "gcs_documented": "Yes"
+        },
+        "text_input": {
+          "ct_hours": "48"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Approve",
+            "rule_ids": [
+              "R3"
+            ],
+            "explanation": "Trauma occurred 48 hours ago, within 0 to 48 hours inclusive, and GCS is documented under R3; no red flags were reported.",
+            "evidence_gaps": []
+          },
+          "success": [
+            "Approve"
+          ],
+          "warning": [],
+          "info": [],
+          "text": [
+            "Trauma occurred 48 hours ago, within 0 to 48 hours inclusive, and GCS is documented under R3; no red flags were reported."
+          ],
+          "markdown": [
+            ":primary-badge[R3]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "The synthetic request meets the applicable payer rule.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "ct-negative-trauma-and-missing-documentation",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "CT head"
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No",
+          "gcs_documented": "No"
+        },
+        "text_input": {
+          "ct_hours": "-1"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": "Needs info",
+            "rule_ids": [
+              "R3"
+            ],
+            "explanation": "Insufficient information to evaluate the CT head request under R3.",
+            "evidence_gaps": [
+              "Trauma time is -1 hours; negative hours are invalid.",
+              "GCS documentation is required."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Needs more info"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the CT head request under R3.",
+            "Trauma time is -1 hours; negative hours are invalid.",
+            "GCS documentation is required."
+          ],
+          "markdown": [
+            ":primary-badge[R3]",
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "More or sufficient evidence is needed. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "ct-blank-hours-are-not-zero",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "CT head"
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No",
+          "gcs_documented": "Yes"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": null,
+            "rule_ids": [],
+            "explanation": "Insufficient information to evaluate the CT head request under R3.",
+            "evidence_gaps": [
+              "Trauma time is missing."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Clarification required"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the CT head request under R3.",
+            "Trauma time is missing."
+          ],
+          "markdown": [
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "No final classification has been made."
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "ct-red-flag-overrides-invalid-hours",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "CT head"
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "Yes"
+        },
+        "text_input": {
+          "ct_hours": "invalid"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Clinician review",
+            "rule_ids": [
+              "R2"
+            ],
+            "explanation": "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence.",
+            "evidence_gaps": []
+          },
+          "success": [],
+          "warning": [],
+          "info": [
+            "Clinician review"
+          ],
+          "text": [
+            "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence."
+          ],
+          "markdown": [
+            ":primary-badge[R2]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "Referral for clinician review. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "ct-unknown-flag-precedes-invalid-evidence",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "CT head"
+        }
+      },
+      {
+        "segmented_control": {
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No"
+        },
+        "text_input": {
+          "ct_hours": "invalid"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": null,
+            "rule_ids": [],
+            "explanation": "Insufficient information to evaluate the CT head request under R2.",
+            "evidence_gaps": [
+              "History of cancer status is unknown."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Clarification required"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the CT head request under R2.",
+            "History of cancer status is unknown."
+          ],
+          "markdown": [
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "No final classification has been made."
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "knee-approval-no-modality-or-upload-field",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "Knee arthroscopy"
+        },
+        "expected": {
+          "result": null,
+          "success": [],
+          "warning": [],
+          "info": [
+            "Complete the request and select Run triage to see the outcome and its reason."
+          ],
+          "text": [],
+          "markdown": [
+            ":gray-badge[:material/pending: Awaiting request]"
+          ],
+          "captions": [
+            "Your result will include the applicable rules and any evidence gaps."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "knee_days",
+            "knee_documented",
+            "mri_report_attached",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No",
+          "knee_documented": "Yes"
+        },
+        "text_input": {
+          "knee_days": "84"
+        },
+        "checkbox": {
+          "mri_report_attached": true
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Approve",
+            "rule_ids": [
+              "R4"
+            ],
+            "explanation": "Knee arthroscopy has 84 days of documented conservative therapy, meeting the 84-day minimum, and an MRI report is attached under R4; no red flags were reported.",
+            "evidence_gaps": []
+          },
+          "success": [
+            "Approve"
+          ],
+          "warning": [],
+          "info": [],
+          "text": [
+            "Knee arthroscopy has 84 days of documented conservative therapy, meeting the 84-day minimum, and an MRI report is attached under R4; no red flags were reported."
+          ],
+          "markdown": [
+            ":primary-badge[R4]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "The synthetic request meets the applicable payer rule.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "knee_days",
+            "knee_documented",
+            "mri_report_attached",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "knee-missing-report-checkbox",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "Knee arthroscopy"
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No",
+          "knee_documented": "Yes"
+        },
+        "text_input": {
+          "knee_days": "84"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": "Needs info",
+            "rule_ids": [
+              "R4"
+            ],
+            "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+            "evidence_gaps": [
+              "MRI report attachment is required."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Needs more info"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+            "MRI report attachment is required."
+          ],
+          "markdown": [
+            ":primary-badge[R4]",
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "More or sufficient evidence is needed. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "knee_days",
+            "knee_documented",
+            "mri_report_attached",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "knee-insufficient-duration",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "Knee arthroscopy"
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No",
+          "knee_documented": "Yes"
+        },
+        "text_input": {
+          "knee_days": "83"
+        },
+        "checkbox": {
+          "mri_report_attached": true
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": "Needs info",
+            "rule_ids": [
+              "R4"
+            ],
+            "explanation": "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+            "evidence_gaps": [
+              "Conservative therapy duration is 83 days; at least 84 days are required."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Needs more info"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the Knee arthroscopy request under R4.",
+            "Conservative therapy duration is 83 days; at least 84 days are required."
+          ],
+          "markdown": [
+            ":primary-badge[R4]",
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "More or sufficient evidence is needed. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "knee_days",
+            "knee_documented",
+            "mri_report_attached",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "knee-red-flag-overrides-invalid-evidence",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "Knee arthroscopy"
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "Yes"
+        },
+        "text_input": {
+          "knee_days": "invalid"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Clinician review",
+            "rule_ids": [
+              "R2"
+            ],
+            "explanation": "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence.",
+            "evidence_gaps": []
+          },
+          "success": [],
+          "warning": [],
+          "info": [
+            "Clinician review"
+          ],
+          "text": [
+            "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence."
+          ],
+          "markdown": [
+            ":primary-badge[R2]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "Referral for clinician review. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "knee_days",
+            "knee_documented",
+            "mri_report_attached",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "unlisted-procedure-referral",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "Other procedure"
+        },
+        "expected": {
+          "result": null,
+          "success": [],
+          "warning": [],
+          "info": [
+            "Complete the request and select Run triage to see the outcome and its reason."
+          ],
+          "text": [],
+          "markdown": [
+            ":gray-badge[:material/pending: Awaiting request]"
+          ],
+          "captions": [
+            "Your result will include the applicable rules and any evidence gaps."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection",
+            "unlisted_procedure"
+          ]
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No"
+        },
+        "text_input": {
+          "unlisted_procedure": "Ultrasound abdomen"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Clinician review",
+            "rule_ids": [
+              "R5"
+            ],
+            "explanation": "Procedure 'Ultrasound abdomen' is not listed in R1, R3, or R4. R5 requires clinician review; no listed approval rule applies.",
+            "evidence_gaps": []
+          },
+          "success": [],
+          "warning": [],
+          "info": [
+            "Clinician review"
+          ],
+          "text": [
+            "Procedure 'Ultrasound abdomen' is not listed in R1, R3, or R4. R5 requires clinician review; no listed approval rule applies."
+          ],
+          "markdown": [
+            ":primary-badge[R5]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "Referral for clinician review. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection",
+            "unlisted_procedure"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "similar-procedure-not-approved",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "Other procedure"
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No"
+        },
+        "text_input": {
+          "unlisted_procedure": "MRI cervical spine"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Clinician review",
+            "rule_ids": [
+              "R5"
+            ],
+            "explanation": "Procedure 'MRI cervical spine' is not listed in R1, R3, or R4. R5 requires clinician review; no listed approval rule applies.",
+            "evidence_gaps": []
+          },
+          "success": [],
+          "warning": [],
+          "info": [
+            "Clinician review"
+          ],
+          "text": [
+            "Procedure 'MRI cervical spine' is not listed in R1, R3, or R4. R5 requires clinician review; no listed approval rule applies."
+          ],
+          "markdown": [
+            ":primary-badge[R5]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "Referral for clinician review. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection",
+            "unlisted_procedure"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "unlisted-procedure-red-flag-priority",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "Other procedure"
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "Yes"
+        },
+        "text_input": {
+          "unlisted_procedure": "Ultrasound abdomen"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Clinician review",
+            "rule_ids": [
+              "R2"
+            ],
+            "explanation": "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence.",
+            "evidence_gaps": []
+          },
+          "success": [],
+          "warning": [],
+          "info": [
+            "Clinician review"
+          ],
+          "text": [
+            "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence."
+          ],
+          "markdown": [
+            ":primary-badge[R2]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "Referral for clinician review. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection",
+            "unlisted_procedure"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "switching-procedure-clears-old-result",
+    "steps": [
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No",
+          "mri_documented": "Yes"
+        },
+        "selectbox": {
+          "mri_type": "physiotherapy"
+        },
+        "text_input": {
+          "mri_days": "42"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Approve",
+            "rule_ids": [
+              "R1"
+            ],
+            "explanation": "MRI lumbar spine has 42 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported.",
+            "evidence_gaps": []
+          },
+          "success": [
+            "Approve"
+          ],
+          "warning": [],
+          "info": [],
+          "text": [
+            "MRI lumbar spine has 42 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported."
+          ],
+          "markdown": [
+            ":primary-badge[R1]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "The synthetic request meets the applicable payer rule.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "selectbox": {
+          "procedure": "CT head"
+        },
+        "expected": {
+          "result": null,
+          "success": [],
+          "warning": [],
+          "info": [
+            "Request updated. Run triage again to see the current outcome."
+          ],
+          "text": [],
+          "markdown": [
+            ":gray-badge[:material/pending: Awaiting request]"
+          ],
+          "captions": [
+            "Your result will include the applicable rules and any evidence gaps."
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "segmented_control": {
+          "gcs_documented": "Yes"
+        },
+        "text_input": {
+          "ct_hours": "24"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Approve",
+            "rule_ids": [
+              "R3"
+            ],
+            "explanation": "Trauma occurred 24 hours ago, within 0 to 48 hours inclusive, and GCS is documented under R3; no red flags were reported.",
+            "evidence_gaps": []
+          },
+          "success": [
+            "Approve"
+          ],
+          "warning": [],
+          "info": [],
+          "text": [
+            "Trauma occurred 24 hours ago, within 0 to 48 hours inclusive, and GCS is documented under R3; no red flags were reported."
+          ],
+          "markdown": [
+            ":primary-badge[R3]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "The synthetic request meets the applicable payer rule.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "red-flag-edit-clears-previous-approval",
+    "steps": [
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No",
+          "mri_documented": "Yes"
+        },
+        "selectbox": {
+          "mri_type": "physiotherapy"
+        },
+        "text_input": {
+          "mri_days": "42"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Approve",
+            "rule_ids": [
+              "R1"
+            ],
+            "explanation": "MRI lumbar spine has 42 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported.",
+            "evidence_gaps": []
+          },
+          "success": [
+            "Approve"
+          ],
+          "warning": [],
+          "info": [],
+          "text": [
+            "MRI lumbar spine has 42 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported."
+          ],
+          "markdown": [
+            ":primary-badge[R1]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "The synthetic request meets the applicable payer rule.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "Yes"
+        },
+        "expected": {
+          "result": null,
+          "success": [],
+          "warning": [],
+          "info": [
+            "Request updated. Run triage again to see the current outcome."
+          ],
+          "text": [],
+          "markdown": [
+            ":gray-badge[:material/pending: Awaiting request]"
+          ],
+          "captions": [
+            "Your result will include the applicable rules and any evidence gaps."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Clinician review",
+            "rule_ids": [
+              "R2"
+            ],
+            "explanation": "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence.",
+            "evidence_gaps": []
+          },
+          "success": [],
+          "warning": [],
+          "info": [
+            "Clinician review"
+          ],
+          "text": [
+            "Reported red flags: History of cancer. R2 requires clinician review regardless of procedure or other evidence."
+          ],
+          "markdown": [
+            ":primary-badge[R2]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "Referral for clinician review. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "reset-clears-result-and-request",
+    "steps": [
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No",
+          "mri_documented": "Yes"
+        },
+        "selectbox": {
+          "mri_type": "physiotherapy"
+        },
+        "text_input": {
+          "mri_days": "42"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Approve",
+            "rule_ids": [
+              "R1"
+            ],
+            "explanation": "MRI lumbar spine has 42 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported.",
+            "evidence_gaps": []
+          },
+          "success": [
+            "Approve"
+          ],
+          "warning": [],
+          "info": [],
+          "text": [
+            "MRI lumbar spine has 42 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported."
+          ],
+          "markdown": [
+            ":primary-badge[R1]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "The synthetic request meets the applicable payer rule.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "button": "reset",
+        "expected": {
+          "result": null,
+          "success": [],
+          "warning": [],
+          "info": [
+            "Complete the request and select Run triage to see the outcome and its reason."
+          ],
+          "text": [],
+          "markdown": [
+            ":gray-badge[:material/pending: Awaiting request]"
+          ],
+          "captions": [
+            "Your result will include the applicable rules and any evidence gaps."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": null,
+            "rule_ids": [],
+            "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R2.",
+            "evidence_gaps": [
+              "History of cancer status is unknown.",
+              "New neurological deficit status is unknown.",
+              "Suspected infection status is unknown."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Clarification required"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the MRI lumbar spine request under R2.",
+            "History of cancer status is unknown.",
+            "New neurological deficit status is unknown.",
+            "Suspected infection status is unknown."
+          ],
+          "markdown": [
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "No final classification has been made."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mri-pending-duration-then-needs-info-and-approval",
+    "steps": [
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No",
+          "mri_documented": "Yes"
+        },
+        "selectbox": {
+          "mri_type": "physiotherapy"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": null,
+            "rule_ids": [],
+            "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+            "evidence_gaps": [
+              "Conservative therapy duration is missing."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Clarification required"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+            "Conservative therapy duration is missing."
+          ],
+          "markdown": [
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "No final classification has been made."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "text_input": {
+          "mri_days": "30"
+        },
+        "expected": {
+          "result": null,
+          "success": [],
+          "warning": [],
+          "info": [
+            "Request updated. Run triage again to see the current outcome."
+          ],
+          "text": [],
+          "markdown": [
+            ":gray-badge[:material/pending: Awaiting request]"
+          ],
+          "captions": [
+            "Your result will include the applicable rules and any evidence gaps."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": "Needs info",
+            "rule_ids": [
+              "R1"
+            ],
+            "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+            "evidence_gaps": [
+              "Conservative therapy duration is 30 days; at least 42 days are required."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Needs more info"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+            "Conservative therapy duration is 30 days; at least 42 days are required."
+          ],
+          "markdown": [
+            ":primary-badge[R1]",
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "More or sufficient evidence is needed. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "text_input": {
+          "mri_days": "42"
+        },
+        "expected": {
+          "result": null,
+          "success": [],
+          "warning": [],
+          "info": [
+            "Request updated. Run triage again to see the current outcome."
+          ],
+          "text": [],
+          "markdown": [
+            ":gray-badge[:material/pending: Awaiting request]"
+          ],
+          "captions": [
+            "Your result will include the applicable rules and any evidence gaps."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Approve",
+            "rule_ids": [
+              "R1"
+            ],
+            "explanation": "MRI lumbar spine has 42 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported.",
+            "evidence_gaps": []
+          },
+          "success": [
+            "Approve"
+          ],
+          "warning": [],
+          "info": [],
+          "text": [
+            "MRI lumbar spine has 42 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported."
+          ],
+          "markdown": [
+            ":primary-badge[R1]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "The synthetic request meets the applicable payer rule.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mri-unknown-versus-explicit-no-documentation",
+    "steps": [
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No"
+        },
+        "selectbox": {
+          "mri_type": "physiotherapy"
+        },
+        "text_input": {
+          "mri_days": "42"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": null,
+            "rule_ids": [],
+            "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+            "evidence_gaps": [
+              "Conservative therapy documentation status is missing."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Clarification required"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+            "Conservative therapy documentation status is missing."
+          ],
+          "markdown": [
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "No final classification has been made."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "segmented_control": {
+          "mri_documented": "No"
+        },
+        "expected": {
+          "result": null,
+          "success": [],
+          "warning": [],
+          "info": [
+            "Request updated. Run triage again to see the current outcome."
+          ],
+          "text": [],
+          "markdown": [
+            ":gray-badge[:material/pending: Awaiting request]"
+          ],
+          "captions": [
+            "Your result will include the applicable rules and any evidence gaps."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": "Needs info",
+            "rule_ids": [
+              "R1"
+            ],
+            "explanation": "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+            "evidence_gaps": [
+              "Conservative therapy documentation is required."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Needs more info"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the MRI lumbar spine request under R1.",
+            "Conservative therapy documentation is required."
+          ],
+          "markdown": [
+            ":primary-badge[R1]",
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "More or sufficient evidence is needed. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "segmented_control": {
+          "mri_documented": "Yes"
+        },
+        "expected": {
+          "result": null,
+          "success": [],
+          "warning": [],
+          "info": [
+            "Request updated. Run triage again to see the current outcome."
+          ],
+          "text": [],
+          "markdown": [
+            ":gray-badge[:material/pending: Awaiting request]"
+          ],
+          "captions": [
+            "Your result will include the applicable rules and any evidence gaps."
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Approve",
+            "rule_ids": [
+              "R1"
+            ],
+            "explanation": "MRI lumbar spine has 42 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported.",
+            "evidence_gaps": []
+          },
+          "success": [
+            "Approve"
+          ],
+          "warning": [],
+          "info": [],
+          "text": [
+            "MRI lumbar spine has 42 days of documented physiotherapy, meeting the 42-day minimum under R1; no red flags were reported."
+          ],
+          "markdown": [
+            ":primary-badge[R1]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "The synthetic request meets the applicable payer rule.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "history_of_cancer",
+            "mri_days",
+            "mri_documented",
+            "mri_type",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "ct-unknown-versus-explicit-no-gcs-documentation",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "CT head"
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No"
+        },
+        "text_input": {
+          "ct_hours": "24"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": null,
+            "rule_ids": [],
+            "explanation": "Insufficient information to evaluate the CT head request under R3.",
+            "evidence_gaps": [
+              "GCS documentation status is missing."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Clarification required"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the CT head request under R3.",
+            "GCS documentation status is missing."
+          ],
+          "markdown": [
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "No final classification has been made."
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "segmented_control": {
+          "gcs_documented": "No"
+        },
+        "expected": {
+          "result": null,
+          "success": [],
+          "warning": [],
+          "info": [
+            "Request updated. Run triage again to see the current outcome."
+          ],
+          "text": [],
+          "markdown": [
+            ":gray-badge[:material/pending: Awaiting request]"
+          ],
+          "captions": [
+            "Your result will include the applicable rules and any evidence gaps."
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": "Needs info",
+            "rule_ids": [
+              "R3"
+            ],
+            "explanation": "Insufficient information to evaluate the CT head request under R3.",
+            "evidence_gaps": [
+              "GCS documentation is required."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Needs more info"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the CT head request under R3.",
+            "GCS documentation is required."
+          ],
+          "markdown": [
+            ":primary-badge[R3]",
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "More or sufficient evidence is needed. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "segmented_control": {
+          "gcs_documented": "Yes"
+        },
+        "expected": {
+          "result": null,
+          "success": [],
+          "warning": [],
+          "info": [
+            "Request updated. Run triage again to see the current outcome."
+          ],
+          "text": [],
+          "markdown": [
+            ":gray-badge[:material/pending: Awaiting request]"
+          ],
+          "captions": [
+            "Your result will include the applicable rules and any evidence gaps."
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "completed",
+            "outcome": "Approve",
+            "rule_ids": [
+              "R3"
+            ],
+            "explanation": "Trauma occurred 24 hours ago, within 0 to 48 hours inclusive, and GCS is documented under R3; no red flags were reported.",
+            "evidence_gaps": []
+          },
+          "success": [
+            "Approve"
+          ],
+          "warning": [],
+          "info": [],
+          "text": [
+            "Trauma occurred 24 hours ago, within 0 to 48 hours inclusive, and GCS is documented under R3; no red flags were reported."
+          ],
+          "markdown": [
+            ":primary-badge[R3]",
+            "**Reason for this result**"
+          ],
+          "captions": [
+            "The synthetic request meets the applicable payer rule.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "ct-nonfinite-input-is-explained",
+    "steps": [
+      {
+        "selectbox": {
+          "procedure": "CT head"
+        }
+      },
+      {
+        "segmented_control": {
+          "history_of_cancer": "No",
+          "new_neurological_deficit": "No",
+          "suspected_infection": "No",
+          "gcs_documented": "Yes"
+        },
+        "text_input": {
+          "ct_hours": "nan"
+        }
+      },
+      {
+        "button": "submit",
+        "expected": {
+          "result": {
+            "status": "pending_info",
+            "outcome": "Needs info",
+            "rule_ids": [
+              "R3"
+            ],
+            "explanation": "Insufficient information to evaluate the CT head request under R3.",
+            "evidence_gaps": [
+              "Trauma time is invalid; provide a finite number of hours."
+            ]
+          },
+          "success": [],
+          "warning": [
+            "Needs more info"
+          ],
+          "info": [],
+          "text": [
+            "Insufficient information to evaluate the CT head request under R3.",
+            "Trauma time is invalid; provide a finite number of hours."
+          ],
+          "markdown": [
+            ":primary-badge[R3]",
+            "**Reason for this result**",
+            "**Information to address**"
+          ],
+          "captions": [
+            "More or sufficient evidence is needed. This is not a denial.",
+            "APPLICABLE RULES"
+          ],
+          "visible_controls": [
+            "ct_hours",
+            "gcs_documented",
+            "history_of_cancer",
+            "new_neurological_deficit",
+            "procedure",
+            "reset",
+            "submit",
+            "suspected_infection"
+          ]
+        }
+      }
+    ]
+  }
+]
